@@ -1,0 +1,15 @@
+﻿<Window x:Class="ripper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBox x:Name="Url" MinWidth="350" />
+            <Button Content="start" Click="OnStartClick" />
+            <Button Content="stop" Click="OnStopClick"></Button>
+        </StackPanel>
+        <ScrollViewer>
+            <TextBox x:Name="LogView" />
+        </ScrollViewer>
+    </DockPanel>
+</Window>
