@@ -62,7 +62,10 @@ namespace ripper
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            DisplayRootViewFor<IShell>();
+            Dictionary<string, object> settings = new Dictionary<string, object>();
+            settings.Add("MinHeight", 480);
+            settings.Add("MinWidth", 640);
+            DisplayRootViewFor<IShell>(settings);
         }
     }
 }

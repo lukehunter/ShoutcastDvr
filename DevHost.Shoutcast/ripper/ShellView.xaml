@@ -5,20 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:cal="http://www.caliburnproject.org"
              xmlns:ripper="clr-namespace:ripper"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=ripper:ShellViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <ItemsControl x:Name="ScheduledRecordings">
+             d:DataContext="{d:DesignInstance Type=ripper:ShellViewModel, IsDesignTimeCreatable=True}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="0">Below is the list of scheduled recordings. To add a scheduled recording, click the Add button.</TextBlock>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="LightGray">
+        <ItemsControl x:Name="ScheduledRecordings"  >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding ShowName}"/>
-                        <Button Content="Edit" cal:Message.Attach="Edit($dataContext)"/>
-                        <Button Content="Remove" cal:Message.Attach="Remove($dataContext)"/>
-                    </StackPanel>
+                    <Border>
+                    <DockPanel LastChildFill="True">
+                            <Button Content="Remove" cal:Message.Attach="Remove($dataContext)" DockPanel.Dock="Right"/>
+                            <Button Content="Edit" cal:Message.Attach="Edit($dataContext)" DockPanel.Dock="Right" />
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding ShowName}"/>
+                            </DockPanel>
+                        </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Button Content="Add" cal:Message.Attach="Add" />
-    </StackPanel>
+        </ScrollViewer>
+        <Button Content="Add" cal:Message.Attach="Add" Grid.Row="2"/>
+    </Grid>
 </UserControl>

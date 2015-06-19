@@ -51,7 +51,6 @@ namespace ripper
 
         public void Add()
         {
-            //ScheduledRecordings.Add(new ScheduledRecording() {ShowName = Guid.NewGuid().ToString()});
             var vm = new ScheduledRecordingViewModel();
 
             var result = mWindowManager.ShowDialog(vm);
