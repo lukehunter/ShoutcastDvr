@@ -1,8 +1,30 @@
 ﻿<Application x:Class="ripper.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ripper="clr-namespace:ripper">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <ripper:RipperBootstrapper x:Key="bootstrapper"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="TopStyle" TargetType="{x:Type FrameworkElement}">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TopStyle}" >
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TopStyle}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="MinWidth" Value="120"/>
+            </Style>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TopStyle}">
+                <Setter Property="MinWidth" Value="60"/>
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource TopStyle}"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

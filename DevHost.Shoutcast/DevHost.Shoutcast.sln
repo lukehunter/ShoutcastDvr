@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevHost.Shoutcast", "DevHos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ripper", "ripper\ripper.csproj", "{2B950E91-ACF6-479B-8290-9F4D6D3C977D}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fripper", "fripper\fripper.fsproj", "{FAD6EA4A-0058-430D-96E0-2214243676D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{2B950E91-ACF6-479B-8290-9F4D6D3C977D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B950E91-ACF6-479B-8290-9F4D6D3C977D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B950E91-ACF6-479B-8290-9F4D6D3C977D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD6EA4A-0058-430D-96E0-2214243676D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD6EA4A-0058-430D-96E0-2214243676D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD6EA4A-0058-430D-96E0-2214243676D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD6EA4A-0058-430D-96E0-2214243676D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
