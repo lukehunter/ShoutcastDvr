@@ -25,7 +25,7 @@ namespace ripper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%USERPROFILE%\\Downloads")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SaveFolder {
             get {
                 return ((string)(this["SaveFolder"]));

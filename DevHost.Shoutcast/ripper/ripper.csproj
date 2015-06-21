@@ -96,15 +96,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EpisodeRecording.cs" />
+    <Compile Include="DebugShowList.cs" />
     <Compile Include="IShell.cs" />
-    <Compile Include="RecordShowTask.cs" />
+    <Compile Include="IShowList.cs" />
+    <Compile Include="JsonShowList.cs" />
+    <Compile Include="RecordShowJob.cs" />
     <Compile Include="RipperBootstrapper.cs" />
-    <Compile Include="ScheduledRecording.cs" />
-    <Compile Include="ScheduledRecordingView.xaml.cs">
-      <DependentUpon>ScheduledRecordingView.xaml</DependentUpon>
+    <Compile Include="Show.cs" />
+    <Compile Include="ShowRecorder.cs" />
+    <Compile Include="ShowView.xaml.cs">
+      <DependentUpon>ShowView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScheduledRecordingViewModel.cs" />
+    <Compile Include="ShowViewModel.cs" />
     <Compile Include="SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -152,7 +155,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ScheduledRecordingView.xaml">
+    <Page Include="ShowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

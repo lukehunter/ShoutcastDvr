@@ -8,11 +8,11 @@ using Caliburn.Micro;
 
 namespace ripper
 {
-    [Export(typeof(ScheduledRecordingViewModel))]
-    public class ScheduledRecordingViewModel : Screen, IHaveDisplayName
+    [Export(typeof(ShowViewModel))]
+    public class ShowViewModel : Screen, IHaveDisplayName
     {
         private string mDisplayName = "Enter Scheduled Recording Info";
-        private ScheduledRecording mScheduledRecording = new ScheduledRecording();
+        private Show mShow = new Show();
 
         public List<string> DayOfWeek
         {
@@ -34,15 +34,15 @@ namespace ripper
             }
         }
 
-        public ScheduledRecording ScheduledRecording
+        public Show Show
         {
             get
             {
-                return mScheduledRecording;
+                return mShow;
             }
             set
             {
-                mScheduledRecording = value;
+                mShow = value;
             }
         }
 
@@ -50,11 +50,11 @@ namespace ripper
         {
             get
             {
-                return ScheduledRecording.DayOfWeek;
+                return Show.DayOfWeek;
             }
             set
             {
-                ScheduledRecording.DayOfWeek = value;
+                Show.DayOfWeek = value;
             }
         }
 

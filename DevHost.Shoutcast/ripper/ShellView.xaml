@@ -11,10 +11,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Grid.Row="0">Below is the list of scheduled recordings. To add a scheduled recording, click the Add button.</TextBlock>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="LightGray">
-        <ItemsControl x:Name="ScheduledRecordings"  >
+        <ItemsControl x:Name="Shows"  >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border>
@@ -29,5 +30,13 @@
         </ItemsControl>
         </ScrollViewer>
         <Button Content="Add" cal:Message.Attach="Add" Grid.Row="2"/>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Start" cal:Message.Attach="Start" Grid.Column="0"/>
+            <Button Content="Stop" cal:Message.Attach="Stop" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </UserControl>

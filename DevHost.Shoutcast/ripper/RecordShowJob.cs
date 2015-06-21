@@ -1,58 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Caliburn.Micro;
 using DevHost.Shoutcast;
+using Quartz;
 
 namespace ripper
 {
-    public class RecordShowTask : IResult
+    class RecordShowJob : IJob 
     {
-        private readonly EpisodeRecording mEpisodeRecording;
-        private Thread mRecordingThread;
-        private CoroutineExecutionContext mContext;
-
-        public RecordShowTask(EpisodeRecording episodeRecording)
+        public void Execute(IJobExecutionContext context)
         {
-            mEpisodeRecording = episodeRecording;
-        }
+            var show = context.MergedJobDataMap.Get(Show.Job_Data_Key) as Show;
 
-        public void Execute(CoroutineExecutionContext context)
-        {
-            mContext = context;
-            StartRecording();
-        }
-
-        public event EventHandler<ResultCompletionEventArgs> Completed;
-
-        private void StartRecording()
-        {
-            //mIsRecordingCanceled = new AutoResetEvent(false);
-            mRecordingThread = new Thread(() => 
-                DoRecording(
-                    mEpisodeRecording.Url, 
-                    TimeSpan.FromSeconds(30), 
-                    Log, 
-                    mEpisodeRecording.SaveLocation, 
-                    () => Completed(this, new ResultCompletionEventArgs())))
+            if (show == null)
             {
-                IsBackground = true,
-                Name = "Ripper recording thread"
-            };
-            mRecordingThread.Start();
+                return;
+            }
+
+            var saveFolder = Properties.Settings.Default.SaveFolder;
+            var basename = string.Format("{0} {1}", DateTime.Now.ToString("yyyy-MM-dd"), show.ShowName);
+            var filename = string.Format("{0}.mp3", basename);
+            var fullname = Path.Combine(saveFolder, filename);
+            var counter = 1;
+
+            while (File.Exists(fullname))
+            {
+                filename = string.Format("{0}-{1}.mp3", basename, counter);
+                fullname = Path.Combine(saveFolder, filename);
+
+                counter++;
+            }
+
+            Log(string.Format("{0} Attempting to record {1} for {2} minutes", DateTime.Now, show.ShowName, show.Duration));
+            DoRecording(show.Url, TimeSpan.FromMinutes(show.Duration), Log, fullname);
         }
 
-        //private void StopRecording()
-        //{
-        //    mIsRecordingCanceled.Set();
-        //}
-
-        private static void DoRecording(string url, TimeSpan duration, Action<string> log, string savePath, System.Action whenDone)
+        private static void DoRecording(string url, TimeSpan duration, Action<string> log, string savePath)
         {
             var started = false;
 
@@ -73,7 +56,7 @@ namespace ripper
                         log(string.Format("Started at {0}", startTime));
                     }
 
-                    //log(string.Format("Writing {0} bytes...\n", bytesread));
+                    log(string.Format("Writing {0} bytes...\n", bytesread));
                     output.Write(buffer, 0, bytesread);
 
                     //if (mIsRecordingCanceled.WaitOne(0))
@@ -97,9 +80,6 @@ namespace ripper
                     lastPrintTime = DateTime.Now;
                 }
             }
-
-            log("Recording thread exiting...");
-            whenDone();
         }
 
         private void Log(string s)

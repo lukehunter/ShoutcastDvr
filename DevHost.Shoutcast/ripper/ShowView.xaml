@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ripper.ScheduledRecordingView"
+﻿<UserControl x:Class="ripper.ShowView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -25,19 +25,19 @@
         </Grid.ColumnDefinitions>
         
         <TextBlock>Show Name:</TextBlock>
-        <TextBox Grid.Column="1" x:Name="ScheduledRecording_ShowName"/>
+        <TextBox Grid.Column="1" x:Name="Show_ShowName"/>
 
         <TextBlock Grid.Row="1">Url:</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="ScheduledRecording_Url"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="Show_Url"/>
 
         <TextBlock Grid.Row="2">Day of Week:</TextBlock>
         <ComboBox Grid.Row="2" Grid.Column="1" x:Name="DayOfWeek" />
 
         <TextBlock Grid.Row="3">Start time (24h format e.g. 1620):</TextBlock>
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="ScheduledRecording_StartTime"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="Show_StartTime"/>
         
         <TextBlock Grid.Row="4">Duration (minutes):</TextBlock>
-        <TextBox Grid.Row="4" Grid.Column="1" x:Name="ScheduledRecording_Duration"/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="Show_Duration"/>
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
             <Button x:Name="Accept">Save</Button>

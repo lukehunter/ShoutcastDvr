@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ripper
 {
     /// <summary>
-    /// Interaction logic for ScheduledRecordingView.xaml
+    /// Interaction logic for ShowView.xaml
     /// </summary>
-    public partial class ScheduledRecordingView : UserControl
+    public partial class ShowView : UserControl
     {
-        public ScheduledRecordingView()
+        public ShowView()
         {
             InitializeComponent();
         }

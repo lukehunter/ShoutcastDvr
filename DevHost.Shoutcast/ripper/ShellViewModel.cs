@@ -15,20 +15,31 @@ namespace ripper
     public class ShellViewModel : Screen, IShell
     {
         private readonly IWindowManager mWindowManager;
-        private BindableCollection<ScheduledRecording> mScheduledRecordings = new BindableCollection<ScheduledRecording>();
-        private readonly string mSavedDataFile =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                         "scheduled_recordings.json");
+        private readonly IShowList mShowList;
+        private string mAppName;
+        private readonly ShowRecorder mShowRecorder;
 
-        public BindableCollection<ScheduledRecording> ScheduledRecordings
+        public override string DisplayName
         {
             get
             {
-                return mScheduledRecordings;
+                return mAppName;
             }
-            private set
+            set
             {
-                mScheduledRecordings = value;
+                mAppName = value;
+            }
+        }
+
+        public BindableCollection<Show> Shows
+        {
+            get
+            {
+                return mShowList.Shows;
+            }
+            set
+            {
+                throw new InvalidOperationException("No setter available through IShowList");
             }
         }
 
@@ -36,22 +47,21 @@ namespace ripper
         public ShellViewModel(IWindowManager windowManager)
         {
             mWindowManager = windowManager;
-            Load();
+            mAppName = "ripper";
+            mShowList =
+                new JsonShowList(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                              "scheduled_recordings.json"));
+            mShowRecorder = new ShowRecorder(mShowList);
         }
 
         public ShellViewModel()
         {
-            ScheduledRecordings = new BindableCollection<ScheduledRecording>
-            {
-                new ScheduledRecording() { ShowName = "palette swapped" },
-                new ScheduledRecording() { ShowName = "othermusic" },
-                new ScheduledRecording() { ShowName = "blah"}
-            };
+            mShowList = new DebugShowList();
         }
 
         public void Add()
         {
-            var vm = new ScheduledRecordingViewModel();
+            var vm = new ShowViewModel();
 
             var result = mWindowManager.ShowDialog(vm);
             bool bresult;
@@ -67,17 +77,22 @@ namespace ripper
             
             if (bresult)
             {
-                ScheduledRecordings.Add(vm.ScheduledRecording);
+                Shows.Add(vm.Show);
             }
 
         }
 
-        public void Edit(ScheduledRecording child)
+        public void Edit(Show show)
         {
-            var vm = new ScheduledRecordingViewModel();
-            vm.ScheduledRecording = child.ShallowCopy();
+            var vm = new ShowViewModel {Show = show.ShallowCopy()};
 
-            var result = mWindowManager.ShowDialog(vm);
+            var settings = new Dictionary<string, object>()
+            {
+                {"MinHeight", 350},
+                {"MinWidth", 400}
+            };
+
+            var result = mWindowManager.ShowDialog(vm, null, settings);
             bool bresult;
 
             if (!result.HasValue)
@@ -94,7 +109,7 @@ namespace ripper
                 return;
             }
 
-            var updated = ScheduledRecordings.First(sr => sr.Id == vm.ScheduledRecording.Id);
+            var updated = Shows.First(sr => sr.Id == vm.Show.Id);
 
             if (updated == null)
             {
@@ -102,16 +117,16 @@ namespace ripper
                 return;
             }
 
-            updated.ShowName = vm.ScheduledRecording.ShowName;
-            updated.DayOfWeek = vm.ScheduledRecording.DayOfWeek;
-            updated.Duration = vm.ScheduledRecording.Duration;
-            updated.StartTime = vm.ScheduledRecording.StartTime;
-            updated.Url = vm.ScheduledRecording.Url;
+            updated.ShowName = vm.Show.ShowName;
+            updated.DayOfWeek = vm.Show.DayOfWeek;
+            updated.Duration = vm.Show.Duration;
+            updated.StartTime = vm.Show.StartTime;
+            updated.Url = vm.Show.Url;
         }
 
-        public void Remove(ScheduledRecording child)
+        public void Remove(Show child)
         {
-            ScheduledRecordings.Remove(child);
+            Shows.Remove(child);
         }
 
         public bool CanStream(string url)
@@ -124,27 +139,40 @@ namespace ripper
             MessageBox.Show(string.Format("Recording {0}", url));
         }
 
+        public bool CanStart
+        {
+            get
+            {
+                return !mShowRecorder.Running;
+            }
+        }
+
+        public void Start()
+        {
+            mShowRecorder.Start();
+            NotifyOfPropertyChange(() => CanStart);
+            NotifyOfPropertyChange(() => CanStop);
+        }
+
+        public bool CanStop
+        {
+            get
+            {
+                return mShowRecorder.Running;
+            }
+        }
+
+        public void Stop()
+        {
+            mShowRecorder.Stop();
+            NotifyOfPropertyChange(() => CanStart);
+            NotifyOfPropertyChange(() => CanStop);
+        }
+
         public override void CanClose(Action<bool> callback)
         {
-            Save(mSavedDataFile, ScheduledRecordings);
+            mShowList.Save();
             callback(true);
-        }
-
-        private static void Save(string filename, object obj)
-        {
-            var json = new JavaScriptSerializer().Serialize(obj);
-            File.WriteAllText(filename, json);
-        }
-
-        private void Load()
-        {
-            if (!File.Exists(mSavedDataFile))
-            {
-                return;
-            }
-
-            var json = File.ReadAllText(mSavedDataFile);
-            ScheduledRecordings = new JavaScriptSerializer().Deserialize<BindableCollection<ScheduledRecording>>(json);
         }
     }
 }

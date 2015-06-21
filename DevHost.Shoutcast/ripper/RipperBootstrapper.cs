@@ -62,6 +62,11 @@ namespace ripper
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
+            if (Properties.Settings.Default.SaveFolder == "")
+            {
+                Properties.Settings.Default.SaveFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            }
+
             Dictionary<string, object> settings = new Dictionary<string, object>();
             settings.Add("MinHeight", 480);
             settings.Add("MinWidth", 640);
