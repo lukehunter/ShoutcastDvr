@@ -17,6 +17,7 @@ namespace ripper
     public class RipperBootstrapper : BootstrapperBase
     {
         private CompositionContainer mContainer;
+        private static log4net.ILog mLog = log4net.LogManager.GetLogger(typeof(RipperBootstrapper));
 
         public RipperBootstrapper()
         {
@@ -66,10 +67,13 @@ namespace ripper
             if (Properties.Settings.Default.SaveFolder == "")
             {
                 Properties.Settings.Default.SaveFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                Properties.Settings.Default.Save();
             }
 
             // log4net configuration
             XmlConfigurator.Configure();
+
+            mLog.Info("App started...");
 
             Dictionary<string, object> settings = new Dictionary<string, object>();
             settings.Add("MinHeight", 480);

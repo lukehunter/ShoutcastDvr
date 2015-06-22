@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.IO;
 using DevHost.Shoutcast;
 using Quartz;
+using log4net;
 
 namespace ripper
 {
     class RecordShowJob : IJob
     {
-        //private static ILog mLogger = LogManager.GetLogger(typeof(RecordShowJob));
+        private static ILog mLogger = LogManager.GetLogger(typeof(RecordShowJob));
 
         public void Execute(IJobExecutionContext context)
         {
@@ -90,8 +91,7 @@ namespace ripper
 
         private void Log(string s)
         {
-            //mLogger.Info(s);
-            Debug.WriteLine(s);
+            mLogger.Info(s);
         }
     }
 }
