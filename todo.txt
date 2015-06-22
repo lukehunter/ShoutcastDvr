@@ -1,0 +1,18 @@
+test closing app while recording
+disable persisting of IsRecording
+data validation when entering new scheduled recording
+prevent editing a show that is recording
+remove show while recording
+prevent updating Quartz schedule on every keypress in the Show dialog
+improve logging (start / stop / filename / time / duration / more info when quartz job scheduled)
+improve efficiency/update speed of next recording calculation
+sort datagrid by column headers
+highlight datagrid row when recording
+show log in UI
+
+store list of shoutcast streams separately from list of shows (update shoutcast stream once if it changes)
+allow per show and per stream settings for separating recordings into folders ( e.g. savefolder\kuci\palette swapped\ or savefolder\kuci\ or savefolder\palette swapped\ )
+allow per app, stream and show settings for pre-record buffer length
+custom filename using %stream_name%, %show_name%, %date%
+
+better name? ShoutcastDvr StreamDvr 
