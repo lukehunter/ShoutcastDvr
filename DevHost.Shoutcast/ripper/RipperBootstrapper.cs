@@ -10,6 +10,7 @@ using Caliburn.Micro;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
+using log4net.Config;
 
 namespace ripper
 {
@@ -66,6 +67,9 @@ namespace ripper
             {
                 Properties.Settings.Default.SaveFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             }
+
+            // log4net configuration
+            XmlConfigurator.Configure();
 
             Dictionary<string, object> settings = new Dictionary<string, object>();
             settings.Add("MinHeight", 480);

@@ -141,22 +141,6 @@ namespace ripper
         {
             mShowRecorder.Start();
             NotifyOfPropertyChange(() => CanStart);
-            NotifyOfPropertyChange(() => CanStop);
-        }
-
-        public bool CanStop
-        {
-            get
-            {
-                return mShowRecorder.Running;
-            }
-        }
-
-        public void Stop()
-        {
-            mShowRecorder.Standby();
-            NotifyOfPropertyChange(() => CanStart);
-            NotifyOfPropertyChange(() => CanStop);
         }
 
         public override void CanClose(Action<bool> callback)

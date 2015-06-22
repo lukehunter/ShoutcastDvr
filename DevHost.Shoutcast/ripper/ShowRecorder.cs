@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using Quartz;
 using Quartz.Impl;
+using log4net;
 
 namespace ripper
 {
@@ -16,6 +17,7 @@ namespace ripper
         private readonly IShowList mShowList;
         private IScheduler mScheduler;
         private bool mRunning;
+        private static ILog mLogger = LogManager.GetLogger(typeof(ShowRecorder));
 
         public bool Running
         {
@@ -40,23 +42,15 @@ namespace ripper
 
         public void Start()
         {
-            Debug.WriteLine("Starting Quartz scheduler..");
+            mLogger.Info("Starting Quartz scheduler..");
             mScheduler.Start();
 
             mRunning = true;
         }
 
-        public void Standby()
-        {
-            Debug.WriteLine("Putting Quartz scheduler on standby..");
-            mScheduler.Standby();
-
-            mRunning = false;
-        }
-
         public void Shutdown(bool waitForJobsToComplete)
         {
-            Debug.WriteLine("Shutting down Quartz scheduler..");
+            mLogger.Info("Shutting down Quartz scheduler..");
             mScheduler.Shutdown(waitForJobsToComplete);
         }
 
@@ -72,7 +66,7 @@ namespace ripper
             var added = nnew.Except(old).ToList();
             var removed = old.Except(nnew).ToList();
 
-            Debug.WriteLine("{0} show(s) added, {1} show(s) removed", added.Count, removed.Count);
+            mLogger.InfoFormat("{0} show(s) added, {1} show(s) removed", added.Count, removed.Count);
             added.ForEach(AddJob);
             removed.ForEach(RemoveJob);
         }
@@ -84,7 +78,7 @@ namespace ripper
 
         private void AddJob(Show show)
         {
-            Debug.WriteLine("ShowRecorder.AddJob {0} {1}", show.Id, show.ShowName);
+            mLogger.InfoFormat("ShowRecorder.AddJob {0} {1}", show.Id, show.ShowName);
             var job = JobBuilder.Create<RecordShowJob>()
                                        .WithIdentity(show.JobId)
                                        .Build();
@@ -121,7 +115,7 @@ namespace ripper
 
         private void RemoveJob(Show show)
         {
-            Debug.WriteLine("ShowRecorder.RemoveJob {0} {1}", show.Id, show.ShowName);
+            mLogger.InfoFormat("ShowRecorder.RemoveJob {0} {1}", show.Id, show.ShowName);
             mScheduler.DeleteJob(new JobKey(show.JobId));
             show.PropertyChanged -= ShowChanged;
         }

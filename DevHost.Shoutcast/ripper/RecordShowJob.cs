@@ -3,11 +3,14 @@ using System.Diagnostics;
 using System.IO;
 using DevHost.Shoutcast;
 using Quartz;
+using log4net;
 
 namespace ripper
 {
-    class RecordShowJob : IJob 
+    class RecordShowJob : IJob
     {
+        private static ILog mLogger = LogManager.GetLogger(typeof(RecordShowJob));
+
         public void Execute(IJobExecutionContext context)
         {
             var show = context.MergedJobDataMap.Get(Show.Job_Data_Key) as Show;
@@ -84,16 +87,7 @@ namespace ripper
 
         private void Log(string s)
         {
-            //var msg = s + "\n";
-            //if (LogView.Dispatcher.CheckAccess())
-            //{
-            //    LogView.Text += msg;
-            //}
-            //else
-            //{
-            //    LogView.Dispatcher.Invoke(() => LogView.Text += msg);
-            //}
-            Debug.WriteLine(s);
+            mLogger.Info(s);
         }
     }
 }
