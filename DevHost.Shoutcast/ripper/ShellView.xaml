@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Start" cal:Message.Attach="Start" Grid.Column="0"/>
-            <Button Content="Stop" cal:Message.Attach="Stop" Grid.Column="1"/>
+            <Button Content="Standby" cal:Message.Attach="Standby" Grid.Column="1"/>
         </Grid>
     </Grid>
 </UserControl>

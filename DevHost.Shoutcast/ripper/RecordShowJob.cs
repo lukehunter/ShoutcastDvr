@@ -56,7 +56,7 @@ namespace ripper
                         log(string.Format("Started at {0}", startTime));
                     }
 
-                    log(string.Format("Writing {0} bytes...\n", bytesread));
+                    //log(string.Format("Writing {0} bytes...\n", bytesread));
                     output.Write(buffer, 0, bytesread);
 
                     //if (mIsRecordingCanceled.WaitOne(0))
@@ -76,7 +76,7 @@ namespace ripper
                         continue;
                     }
 
-                    log(string.Format("Recording for {0} seconds..", DateTime.Now - startTime));
+                    //log(string.Format("Recording for {0} seconds..", DateTime.Now - startTime));
                     lastPrintTime = DateTime.Now;
                 }
             }

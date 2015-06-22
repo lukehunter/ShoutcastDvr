@@ -129,16 +129,6 @@ namespace ripper
             Shows.Remove(child);
         }
 
-        public bool CanStream(string url)
-        {
-            return Uri.IsWellFormedUriString(url, UriKind.Absolute);
-        }
-
-        public void Stream(string url)
-        {
-            MessageBox.Show(string.Format("Recording {0}", url));
-        }
-
         public bool CanStart
         {
             get
@@ -164,7 +154,7 @@ namespace ripper
 
         public void Stop()
         {
-            mShowRecorder.Stop();
+            mShowRecorder.Standby();
             NotifyOfPropertyChange(() => CanStart);
             NotifyOfPropertyChange(() => CanStop);
         }
@@ -172,6 +162,7 @@ namespace ripper
         public override void CanClose(Action<bool> callback)
         {
             mShowList.Save();
+            mShowRecorder.Shutdown(false);
             callback(true);
         }
     }

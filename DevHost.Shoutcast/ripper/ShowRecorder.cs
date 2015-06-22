@@ -40,16 +40,24 @@ namespace ripper
 
         public void Start()
         {
+            Debug.WriteLine("Starting Quartz scheduler..");
             mScheduler.Start();
 
             mRunning = true;
         }
 
-        public void Stop()
+        public void Standby()
         {
+            Debug.WriteLine("Putting Quartz scheduler on standby..");
             mScheduler.Standby();
 
             mRunning = false;
+        }
+
+        public void Shutdown(bool waitForJobsToComplete)
+        {
+            Debug.WriteLine("Shutting down Quartz scheduler..");
+            mScheduler.Shutdown(waitForJobsToComplete);
         }
 
         private void SetupHandlers()
@@ -64,6 +72,7 @@ namespace ripper
             var added = nnew.Except(old).ToList();
             var removed = old.Except(nnew).ToList();
 
+            Debug.WriteLine("{0} show(s) added, {1} show(s) removed", added.Count, removed.Count);
             added.ForEach(AddJob);
             removed.ForEach(RemoveJob);
         }
@@ -71,11 +80,6 @@ namespace ripper
         private void AddAllShows()
         {
             mShowList.Shows.ToList().ForEach(AddJob);
-        }
-
-        private void RemoveAllShows()
-        {
-            mShowList.Shows.ToList().ForEach(RemoveJob);
         }
 
         private void AddJob(Show show)
