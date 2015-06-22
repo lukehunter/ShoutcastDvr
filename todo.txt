@@ -11,7 +11,8 @@ highlight datagrid row when recording
 show log in UI
 settings dialog (save folder, saved shoutcast streams, pre-record and post-record lengths (app context), filename pattern)
 shoutcast stream dialog (name, url, pre/post record length (stream context), save into stream subfolder)
-id3 tagging
+disable scheduled recording without removing
+full cron based scheduling UI
 
 store list of shoutcast streams separately from list of shows (update shoutcast stream once if it changes)
 allow per show and per stream settings for separating recordings into folders ( e.g. savefolder\kuci\palette swapped\ or savefolder\kuci\ or savefolder\palette swapped\ )
