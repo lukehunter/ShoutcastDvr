@@ -21,4 +21,5 @@ allow per app, stream and show settings for pre-record buffer length
 per show setting for genre
 custom filename using %stream_name%, %show_name%, %date%, %genre%
 
-better name? ShoutcastDvr StreamDvr 
+versioning
+installer
