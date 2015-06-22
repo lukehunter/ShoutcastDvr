@@ -34,7 +34,7 @@ namespace ripper
             var batch = new CompositionBatch();
 
             batch.AddExportedValue<IWindowManager>(new WindowManager());
-            batch.AddExportedValue<IEventAggregator>(new EventAggregator());
+            batch.AddExportedValue(EvtAgg.Current);
             batch.AddExportedValue(mContainer);
 
             mContainer.Compose(batch);

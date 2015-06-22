@@ -3,13 +3,12 @@ using System.Diagnostics;
 using System.IO;
 using DevHost.Shoutcast;
 using Quartz;
-using log4net;
 
 namespace ripper
 {
     class RecordShowJob : IJob
     {
-        private static ILog mLogger = LogManager.GetLogger(typeof(RecordShowJob));
+        //private static ILog mLogger = LogManager.GetLogger(typeof(RecordShowJob));
 
         public void Execute(IJobExecutionContext context)
         {
@@ -35,7 +34,11 @@ namespace ripper
             }
 
             Log(string.Format("{0} Attempting to record {1} for {2} minutes", DateTime.Now, show.ShowName, show.Duration));
+
+            
+            EvtAgg.Current.Publish(new ShowRecordingStatusChangedEvent(show.Id, true), Caliburn.Micro.Execute.OnUIThread);
             DoRecording(show.Url, TimeSpan.FromMinutes(show.Duration), Log, fullname);
+            EvtAgg.Current.Publish(new ShowRecordingStatusChangedEvent(show.Id, false), Caliburn.Micro.Execute.OnUIThread);
         }
 
         private static void DoRecording(string url, TimeSpan duration, Action<string> log, string savePath)
@@ -87,7 +90,8 @@ namespace ripper
 
         private void Log(string s)
         {
-            mLogger.Info(s);
+            //mLogger.Info(s);
+            Debug.WriteLine(s);
         }
     }
 }

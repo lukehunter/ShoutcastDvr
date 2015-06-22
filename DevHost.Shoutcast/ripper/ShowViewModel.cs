@@ -12,7 +12,12 @@ namespace ripper
     public class ShowViewModel : Screen, IHaveDisplayName
     {
         private string mDisplayName = "Enter Scheduled Recording Info";
-        private Show mShow = new Show();
+        private Show mShow;
+
+        public ShowViewModel()
+        {
+            mShow = new Show();
+        }
 
         public List<string> DayOfWeek
         {

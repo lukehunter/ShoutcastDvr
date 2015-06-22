@@ -11,11 +11,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Grid.Row="0">Below is the list of scheduled recordings. To add a scheduled recording, click the Add button.</TextBlock>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="LightGray">
-        <ItemsControl x:Name="Shows"  >
+        <!--<ItemsControl x:Name="Shows"  >
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border>
@@ -27,15 +26,31 @@
                         </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ItemsControl>-->
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Shows}" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Show" Binding="{Binding ShowName}" />
+                    <DataGridCheckBoxColumn Header="Rec" Binding="{Binding IsRecording}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Day of Week" Binding="{Binding DayOfWeek}" />
+                    <DataGridTextColumn Header="Start" Binding="{Binding StartText}" />
+                    <DataGridTextColumn Header="Next" Binding="{Binding NextRun}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" cal:Message.Attach="Edit($dataContext)" DockPanel.Dock="Right" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Remove" cal:Message.Attach="Remove($dataContext)" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </ScrollViewer>
         <Button Content="Add" cal:Message.Attach="Add" Grid.Row="2"/>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Content="Start" cal:Message.Attach="Start" Grid.Column="0"/>
-        </Grid>
     </Grid>
 </UserControl>

@@ -3,9 +3,11 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using Caliburn.Micro;
 using Quartz;
 using Quartz.Impl;
-using log4net;
+using ILog = log4net.ILog;
+using LogManager = log4net.LogManager;
 
 namespace ripper
 {
@@ -35,6 +37,7 @@ namespace ripper
         {
             mShowList = showList;
             mScheduler = StdSchedulerFactory.GetDefaultScheduler();
+            Start();
 
             AddAllShows();
             SetupHandlers();
@@ -105,7 +108,8 @@ namespace ripper
         {
             var show = sender as Show;
 
-            if (show == null)
+            // TODO LAH 2015-06-21: HACK
+            if (show == null || !(new List<string> {"StartTime", "Duration", "ShowName", "Url", "DayOfWeek"}.Contains(propertyChangedEventArgs.PropertyName)))
             {
                 return;
             }

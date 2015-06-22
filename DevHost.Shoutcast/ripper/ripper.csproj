@@ -100,6 +100,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DebugShowList.cs" />
+    <Compile Include="EvtAgg.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="IShowList.cs" />
     <Compile Include="JsonShowList.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="RipperBootstrapper.cs" />
     <Compile Include="Show.cs" />
     <Compile Include="ShowRecorder.cs" />
+    <Compile Include="ShowRecordingStatusChangedEvent.cs" />
     <Compile Include="ShowView.xaml.cs">
       <DependentUpon>ShowView.xaml</DependentUpon>
     </Compile>
