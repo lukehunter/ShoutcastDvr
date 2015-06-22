@@ -1,5 +1,5 @@
 test closing app while recording
-disable persisting of IsRecording
+disable persisting of IsRecording, NextShowTime, etc.
 data validation when entering new scheduled recording
 prevent editing a show that is recording
 remove show while recording
