@@ -9,10 +9,14 @@ improve efficiency/update speed of next recording calculation
 sort datagrid by column headers
 highlight datagrid row when recording
 show log in UI
+settings dialog (save folder, saved shoutcast streams, pre-record and post-record lengths (app context), filename pattern)
+shoutcast stream dialog (name, url, pre/post record length (stream context), save into stream subfolder)
+id3 tagging
 
 store list of shoutcast streams separately from list of shows (update shoutcast stream once if it changes)
 allow per show and per stream settings for separating recordings into folders ( e.g. savefolder\kuci\palette swapped\ or savefolder\kuci\ or savefolder\palette swapped\ )
 allow per app, stream and show settings for pre-record buffer length
-custom filename using %stream_name%, %show_name%, %date%
+per show setting for genre
+custom filename using %stream_name%, %show_name%, %date%, %genre%
 
 better name? ShoutcastDvr StreamDvr 
