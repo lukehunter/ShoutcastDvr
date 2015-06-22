@@ -5,7 +5,7 @@ ShoutcastDvr
 Windows software to schedule recurring recordings of radio shows on shoutcast.
 
 ### Screenshot
-[![screenshot](https://github.com/lukehunter/ShoutcastDvr/blob/master/screenshot.png)]
+![screenshot](https://github.com/lukehunter/ShoutcastDvr/blob/master/screenshot.png)
 
 ### DISCLAIMER
 Please note: all tools/ scripts in this repo are released for use "AS IS" **without any warranties of any kind**,
