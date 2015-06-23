@@ -25,3 +25,5 @@ custom filename using %stream_name%, %show_name%, %date%, %genre%
 
 versioning
 installer
+
+work like a real DVR (live buffer with rew/ff, option to save a show after already started listening) http://www.codeproject.com/Articles/345105/Memory-Stream-Multiplexer-write-and-read-from-many
