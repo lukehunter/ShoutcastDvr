@@ -14,6 +14,7 @@ shoutcast stream dialog (name, url, pre/post record length (stream context), sav
 disable scheduled recording without removing
 full cron based scheduling UI
 timers not going away properly
+add button in ShowView to test shoutcast url (save 5 seconds of audio and then play it for the user)
 
 store list of shoutcast streams separately from list of shows (update shoutcast stream once if it changes)
 allow per show and per stream settings for separating recordings into folders ( e.g. savefolder\kuci\palette swapped\ or savefolder\kuci\ or savefolder\palette swapped\ )
