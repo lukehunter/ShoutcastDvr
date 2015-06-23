@@ -2,7 +2,7 @@ ShoutcastDvr
 ============
 
 ### Description
-Windows software to schedule recurring recordings of radio shows on shoutcast.
+Windows software to schedule recurring recordings of radio shows on shoutcast. Credit to Dirk Reske for building a nice ShoutcastStream class upon which this is based: http://www.codeproject.com/Articles/19125/ShoutcastStream-Class
 
 ### Screenshot
 ![screenshot](https://github.com/lukehunter/ShoutcastDvr/blob/master/screenshot.png)
