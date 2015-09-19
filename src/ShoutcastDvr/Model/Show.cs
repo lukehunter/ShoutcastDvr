@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Timers;
+using System.Web.Script.Serialization;
 using Caliburn.Micro;
 
 namespace ShoutcastDvr
@@ -45,6 +46,7 @@ namespace ShoutcastDvr
             }
         }
 
+        [ScriptIgnore]
         public string JobId
         {
             get
@@ -53,6 +55,7 @@ namespace ShoutcastDvr
             }
         }
 
+        [ScriptIgnore]
         public string TriggerId
         {
             get
@@ -74,6 +77,7 @@ namespace ShoutcastDvr
             }
         }
 
+        [ScriptIgnore]
         public bool IsRecording
         {
             get
@@ -115,6 +119,7 @@ namespace ShoutcastDvr
             }
         }
 
+        [ScriptIgnore]
         public DayOfWeek DayOfWeekCron
         {
             get
@@ -138,6 +143,7 @@ namespace ShoutcastDvr
             }
         }
 
+        [ScriptIgnore]
         public string StartText
         {
             get
@@ -168,6 +174,7 @@ namespace ShoutcastDvr
             }
         }
 
+        [ScriptIgnore]
         public string NextRun
         {
             get
