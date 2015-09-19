@@ -40,6 +40,9 @@
     <Reference Include="Caliburn.Micro.Platform">
       <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="CommandLine">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Logging">
       <HintPath>..\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
@@ -107,6 +110,7 @@
     <Compile Include="Interfaces\IShowList.cs" />
     <Compile Include="Model\JsonShowList.cs" />
     <Compile Include="Controller\RecordShowJob.cs" />
+    <Compile Include="Model\Options.cs" />
     <Compile Include="ShoutcastDvrBootstrapper.cs" />
     <Compile Include="Model\Show.cs" />
     <Compile Include="Controller\ShowRecorder.cs" />
@@ -157,6 +161,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Caliburn.Micro.Validation\Caliburn.Micro.Validation.csproj">
+      <Project>{12dfe382-b20b-4e0e-8ba8-b06ecd71c7ac}</Project>
+      <Name>Caliburn.Micro.Validation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DevHost.Shoutcast\DevHost.Shoutcast.csproj">
       <Project>{bc43dc88-a22c-445e-8d1f-7404fb9ea245}</Project>
       <Name>DevHost.Shoutcast</Name>

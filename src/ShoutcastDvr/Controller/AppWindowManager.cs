@@ -17,13 +17,16 @@ namespace ShoutcastDvr.Controller
         {
             Window = base.EnsureWindow(model, view, isDialog);
 
-            Window.SizeToContent = SizeToContent.Manual;
-
-            // Set window size
-            if( Settings.Default.WindowSize != null && Settings.Default.WindowSize.Height != 0 && Settings.Default.WindowSize.Width != 0 )
+            if (view is ShellView)
             {
-                Window.Width = Settings.Default.WindowSize.Width;
-                Window.Height = Settings.Default.WindowSize.Height;
+                Window.SizeToContent = SizeToContent.Manual;
+                // Set window size
+                if (Settings.Default.WindowSize != null && Settings.Default.WindowSize.Height != 0 &&
+                    Settings.Default.WindowSize.Width != 0)
+                {
+                    Window.Width = Settings.Default.WindowSize.Width;
+                    Window.Height = Settings.Default.WindowSize.Height;
+                }
             }
 
             return Window;

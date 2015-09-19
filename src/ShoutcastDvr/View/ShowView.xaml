@@ -28,7 +28,7 @@
         <TextBox Grid.Column="1" x:Name="Show_ShowName"/>
 
         <TextBlock Grid.Row="1">Url:</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="Show_Url"/>
+        <TextBox Grid.Row="1" Grid.Column="1" MinWidth="250" x:Name="Show_Url"/>
 
         <TextBlock Grid.Row="2">Day of Week:</TextBlock>
         <ComboBox Grid.Row="2" Grid.Column="1" x:Name="DayOfWeek" />

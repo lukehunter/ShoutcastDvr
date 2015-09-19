@@ -47,19 +47,27 @@ namespace ShoutcastDvr
 
         public void Save()
         {
+            var filename = GetFilename();
             var json = new JavaScriptSerializer().Serialize(Shows);
-            File.WriteAllText(mFilename, json);
+            File.WriteAllText(filename, json);
         }
 
         private void Load()
         {
-            if (!File.Exists(mFilename))
+            var filename = GetFilename();
+
+            if( !File.Exists(filename) )
             {
                 return;
             }
 
-            var json = File.ReadAllText(mFilename);
+            var json = File.ReadAllText(filename);
             Shows = new JavaScriptSerializer().Deserialize<BindableCollection<Show>>(json);
+        }
+
+        private string GetFilename()
+        {
+            return !string.IsNullOrWhiteSpace(Model.Options.Instance.SchedulePath) ? Model.Options.Instance.SchedulePath : mFilename;
         }
     }
 }

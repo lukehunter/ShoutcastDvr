@@ -4,18 +4,27 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Caliburn.Micro;
+using Caliburn.Micro.Validation;
 
 namespace ShoutcastDvr
 {
     [Export(typeof(ShowViewModel))]
-    public class ShowViewModel : Screen, IHaveDisplayName
+    public class ShowViewModel : ValidatingScreen, IHaveDisplayName
     {
         private string mDisplayName = "Enter Scheduled Recording Info";
         private Show mShow;
 
         public ShowViewModel()
         {
+            AddValidationRule(() => Show.ShowName).Condition(() => string.IsNullOrWhiteSpace(Show.ShowName)).Message("Please enter show name");
+            AddValidationRule(() => Show.Duration)
+                .Condition(() => Show.Duration <= 0)
+                .Message("Please set show duration greater than zero");
+            AddValidationRule(() => Show.Url)
+                .Condition(() => !Uri.IsWellFormedUriString(Show.Url, UriKind.Absolute))
+                .Message("Please enter a valid shoutcast url for the show");
             mShow = new Show();
         }
 
@@ -36,6 +45,7 @@ namespace ShoutcastDvr
             set
             {
                 mDisplayName = value;
+                NotifyOfPropertyChange(() => DisplayName);
             }
         }
 
@@ -65,7 +75,16 @@ namespace ShoutcastDvr
 
         public void Accept()
         {
-            TryClose(true);
+            var result = Validate();
+
+            if (result != "")
+            {
+                MessageBox.Show(result, "Error");
+            }
+            else
+            {
+                TryClose(true);   
+            }
         }
 
         public void Cancel()
