@@ -34,7 +34,7 @@ namespace ShoutcastDvr
 
             var batch = new CompositionBatch();
 
-            batch.AddExportedValue<IWindowManager>(new WindowManager());
+            batch.AddExportedValue<IWindowManager>(new Controller.AppWindowManager());
             batch.AddExportedValue(EvtAgg.Current);
             batch.AddExportedValue(mContainer);
 

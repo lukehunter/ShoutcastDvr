@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:cal="http://www.caliburnproject.org"
              xmlns:shoutcastDvr="clr-namespace:ShoutcastDvr"
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=shoutcastDvr:ShellViewModel, IsDesignTimeCreatable=True}">
-    <Grid>
+             d:DataContext="{d:DesignInstance Type=shoutcastDvr:ShellViewModel, IsDesignTimeCreatable=True}"
+             x:Name="UserControl" Loaded="UserControl_Loaded">
+    <Grid Height="{Binding ElementName=UserControl, Path=ActualHeight}" Width="{Binding ElementName=UserControl, Path=ActualWidth}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -14,19 +15,6 @@
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Left" Grid.Row="0">Below is the list of scheduled recordings. To add a scheduled recording, click the Add button.</TextBlock>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="LightGray">
-        <!--<ItemsControl x:Name="Shows"  >
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border>
-                    <DockPanel LastChildFill="True">
-                            <Button Content="Remove" cal:Message.Attach="Remove($dataContext)" DockPanel.Dock="Right"/>
-                            <Button Content="Edit" cal:Message.Attach="Edit($dataContext)" DockPanel.Dock="Right" />
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding ShowName}"/>
-                            </DockPanel>
-                        </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
             <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Shows}" CanUserAddRows="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Show" Binding="{Binding ShowName}" />

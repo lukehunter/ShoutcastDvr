@@ -61,6 +61,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive.Core">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -99,28 +100,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DebugShowList.cs" />
-    <Compile Include="EvtAgg.cs" />
-    <Compile Include="IShell.cs" />
-    <Compile Include="IShowList.cs" />
-    <Compile Include="JsonShowList.cs" />
-    <Compile Include="RecordShowJob.cs" />
+    <Compile Include="Controller\AppWindowManager.cs" />
+    <Compile Include="Model\DebugShowList.cs" />
+    <Compile Include="Events\EvtAgg.cs" />
+    <Compile Include="Interfaces\IShell.cs" />
+    <Compile Include="Interfaces\IShowList.cs" />
+    <Compile Include="Model\JsonShowList.cs" />
+    <Compile Include="Controller\RecordShowJob.cs" />
     <Compile Include="ShoutcastDvrBootstrapper.cs" />
-    <Compile Include="Show.cs" />
-    <Compile Include="ShowRecorder.cs" />
-    <Compile Include="ShowRecordingStatusChangedEvent.cs" />
-    <Compile Include="ShowView.xaml.cs">
+    <Compile Include="Model\Show.cs" />
+    <Compile Include="Controller\ShowRecorder.cs" />
+    <Compile Include="Events\ShowRecordingStatusChangedEvent.cs" />
+    <Compile Include="View\ShowView.xaml.cs">
       <DependentUpon>ShowView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShowViewModel.cs" />
-    <Compile Include="SettingsView.xaml.cs">
+    <Compile Include="ViewModel\ShowViewModel.cs" />
+    <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsViewModel.cs" />
-    <Compile Include="ShellView.xaml.cs">
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="View\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShellViewModel.cs" />
+    <Compile Include="ViewModel\ShellViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -161,15 +163,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ShowView.xaml">
+    <Page Include="View\ShowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsView.xaml">
+    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ShellView.xaml">
+    <Page Include="View\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

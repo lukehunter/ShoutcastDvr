@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ShoutcastDvr.Properties;
 
 namespace ShoutcastDvr
 {
@@ -23,6 +24,13 @@ namespace ShoutcastDvr
         public ShellView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Set window size
+            //Width = Settings.Default.WindowSize.Width;
+            //Height = Settings.Default.WindowSize.Height;
         }
     }
 }

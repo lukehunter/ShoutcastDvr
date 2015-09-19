@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
-using System.Web.Script.Serialization;
+using ShoutcastDvr.Controller;
+using ShoutcastDvr.Properties;
+using Size = System.Windows.Size;
 
 namespace ShoutcastDvr
 {
@@ -74,12 +74,11 @@ namespace ShoutcastDvr
             {
                 bresult = (bool)result;
             }
-            
-            if (bresult)
-            {
-                Shows.Add(vm.Show);
-            }
 
+            if (!bresult) return;
+
+            Shows.Add(vm.Show);
+            mShowList.Save();
         }
 
         public void Edit(Show show)
@@ -122,11 +121,14 @@ namespace ShoutcastDvr
             updated.Duration = vm.Show.Duration;
             updated.StartTime = vm.Show.StartTime;
             updated.Url = vm.Show.Url;
+
+            mShowList.Save();
         }
 
         public void Remove(Show child)
         {
             Shows.Remove(child);
+            mShowList.Save();
         }
 
         public bool CanStart
@@ -147,6 +149,24 @@ namespace ShoutcastDvr
         {
             mShowList.Save();
             mShowRecorder.Shutdown(false);
+
+            var wm = mWindowManager as AppWindowManager;
+
+            if (wm != null)
+            {
+                if (wm.Window.WindowState == WindowState.Normal)
+                {
+                    Settings.Default.WindowSize = new Size(wm.Window.Width, wm.Window.Height);
+                }
+                else
+                {
+                    Settings.Default.WindowSize = wm.Window.RestoreBounds.Size;
+                }
+            }
+
+            // Save settings
+            Settings.Default.Save();
+
             callback(true);
         }
     }
