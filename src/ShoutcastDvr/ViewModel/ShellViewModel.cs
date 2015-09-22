@@ -154,13 +154,13 @@ namespace ShoutcastDvr
 
             if (wm != null)
             {
-                if (wm.Window.WindowState == WindowState.Normal)
+                if (wm.ShellWindow.WindowState == WindowState.Normal)
                 {
-                    Settings.Default.WindowSize = new Size(wm.Window.Width, wm.Window.Height);
+                    Settings.Default.WindowSize = new Size(wm.ShellWindow.Width, wm.ShellWindow.Height);
                 }
                 else
                 {
-                    Settings.Default.WindowSize = wm.Window.RestoreBounds.Size;
+                    Settings.Default.WindowSize = wm.ShellWindow.RestoreBounds.Size;
                 }
             }
 
