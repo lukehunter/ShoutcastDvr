@@ -1,3 +1,4 @@
+survive tcp disconnects
 test closing app while recording
 data validation when entering new scheduled recording
 prevent editing a show that is recording
